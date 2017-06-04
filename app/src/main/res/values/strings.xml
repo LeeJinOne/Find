@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Find</string>
+    <string name="loading">loading</string>
+    <string name="signed_out">로그인 해주세요!</string>
+    <string name="signed_in_fmt">%s님, 환영합니다.</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="sign_out">Sign out</string>
+    <string name="disconnect">Disconnect</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">로그인!</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="go_main">메인으로</string>
+    <string name="limit_time">예약 제한 시간 표시</string>
+</resources>

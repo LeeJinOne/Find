@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MapsActivity" >
+
+    <fragment
+        android:id="@+id/autocomplete_fragment"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_below="@+id/autocomplete_fragment" />
+
+    <ListView
+        android:id="@+id/listview1"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true">
+
+    </ListView>
+
+</RelativeLayout>

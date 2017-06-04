@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/dbopenbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DataBase Open" />
+
+        <EditText
+            android:id="@+id/customedit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Custom DataBase" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/createtbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Table" />
+
+        <EditText
+            android:id="@+id/tbledit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Table name" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/addinforbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="add data" />
+
+        <EditText
+            android:id="@+id/addpk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="add pk" />
+        <EditText
+            android:id="@+id/addindex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="add index" />
+        <EditText
+            android:id="@+id/addppl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="add ppl" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:id="@+id/show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="order" />
+        <EditText
+            android:id="@+id/selectedit"
+            android:hint="insert order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""/>
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="#11ffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/logtext"
+                android:textSize="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
