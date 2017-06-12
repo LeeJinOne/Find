@@ -10,8 +10,11 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -46,6 +49,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -61,6 +68,7 @@ public class MapsActivity extends AppCompatActivity
         LocationListener,
         GoogleMap.OnMarkerClickListener,
         PlaceSelectionListener {
+    DataHandler handler;
 
     private GoogleApiClient mGoogleApiClient = null;
     private GoogleMap mGoogleMap = null;
@@ -88,6 +96,7 @@ public class MapsActivity extends AppCompatActivity
     private static final LatLng PCbang = new LatLng(37.359536, 126.932509);
 
     /** 마커 객체 생성 */
+    private Marker markerList[] = null;
     private Marker mDaelim;
     private Marker mPCbang;
 
@@ -95,6 +104,8 @@ public class MapsActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        handler = new DataHandler();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -142,7 +153,6 @@ public class MapsActivity extends AppCompatActivity
     /**
      * Callback invoked when a place has been selected from the PlaceAutocompleteFragment.
      */
-    // TODO: 자동완성 위젯에서 장소를 선택했을 때 해당 장소로 카메라가 연결된 후 그 장소에서 멈춰있도록 해야함.
     @Override
     public void onPlaceSelected(Place place) {
         Log.i(TAG, "Place Selected: " + place.getName());
@@ -227,6 +237,8 @@ public class MapsActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
+        new JinoneHttpTask(handler).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "get_location.php", "");
+
         if (mGoogleApiClient != null)
          mGoogleApiClient.connect();
     }
@@ -291,6 +303,42 @@ public class MapsActivity extends AppCompatActivity
         super.onDestroy();
     }
 
+    String tit[] = new String[0];
+    double latt[] = new double[0];
+    double lngt[] = new double[0];
+
+    class DataHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            String result = msg.obj.toString().trim();
+            Log.e("Handler", "result =" + result);
+
+            String[] strs = result.split("\\|");
+            for (String str : strs) {
+                Log.e("Handler", "str = " + str);
+            }
+
+            switch (strs[0]){
+                case "get_location.php":
+                    JSONArray jsona = null;
+                    try{
+                        jsona = new JSONArray(strs[1]);
+                        for(int i = 0; i < jsona.length(); i++){
+                            JSONObject json = jsona.getJSONObject(i);
+                            tit[i] = json.getString("tit");
+                            latt[i] = json.getDouble("lat");
+                            lngt[i] = json.getDouble("lon");
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
 
 
 
@@ -308,7 +356,13 @@ public class MapsActivity extends AppCompatActivity
         //mGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(17));
 
-        /** 구글 맵에 마커를 넣는 부분 */
+        /* 구글 맵에 마커를 넣는 부분 */
+
+        for (int j=0; j < tit.length;j++) {
+            markerList[j] = map.addMarker(new MarkerOptions()
+                    .position(new LatLng(latt[j], lngt[j]))
+                    .title(tit[j]));
+        }
         mDaelim = map.addMarker(new MarkerOptions()
             .position(DAELIM)
             .title("대림대 전산관"));

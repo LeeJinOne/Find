@@ -59,12 +59,26 @@
             android:text="@string/disconnect" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/goToMain"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sign_out_and_disconnect"
-        android:text="@string/go_main" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/goToMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/go_main" />
+
+        <Button
+            android:id="@+id/joinBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SignIn"/>
+
+    </LinearLayout>
+
+
 
     <Button
         android:id="@+id/manager"

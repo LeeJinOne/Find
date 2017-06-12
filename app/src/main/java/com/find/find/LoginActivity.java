@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
-    private Button mgoToMain, managerBtn;
+    private Button mgoToMain, managerBtn, joinBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements
 
         mStatusTextView = (TextView) findViewById(R.id.status);
         managerBtn = (Button)findViewById(R.id.manager);
+        joinBtn = (Button)findViewById(R.id.joinBtn);
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
@@ -63,6 +64,12 @@ public class LoginActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(context, DBActivity.class));
+            }
+        });
+        joinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, JoinActivity.class));
             }
         });
 
